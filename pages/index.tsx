@@ -3,11 +3,12 @@ import styles from '@/styles/Home.module.css';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { fetchImageGallery } from './components/axios';
-import { PER_PAGE, API_KEY } from './components/constants';
+import fetchImageGallery from './components/axios';
+import constants from './components/constants';
 import ImageGallery from './components/ImageGallery';
 import SearchBar from './components/SearchBar';
-import { Loader, LoaderForMoreImage } from './components/Loader/Loader';
+import Loader from './components/Loader/Loader';
+import LoaderForMoreImage from './components/Loader/LoaderBar';
 import Modal from './components/Modal';
 import ModalImage from './components/ModalImage';
 import Button from './components/Button';
@@ -36,6 +37,7 @@ export default function App() {
   }
 
   useEffect(() => {
+    const { PER_PAGE, API_KEY } = constants;
     const controller = new AbortController();
     const fetchData = async () => {
       try {
@@ -103,7 +105,7 @@ export default function App() {
     event: React.SyntheticEvent & FormSubmitLayout
   ) => {
     event.preventDefault();
-
+    const { PER_PAGE } = constants;
     if (searchValue === event.target[1].value.trim()) {
       event.target[1].value = '';
       return;
