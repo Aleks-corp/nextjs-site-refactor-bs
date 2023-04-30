@@ -3,7 +3,6 @@ import styles from '@/styles/Home.module.css';
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import fetchImageGallery from './components/axios';
 import ImageGallery from './components/ImageGallery';
 import SearchBar from './components/SearchBar';
 import Loader from './components/Loader/Loader';
@@ -11,6 +10,8 @@ import LoaderForMoreImage from './components/Loader/LoaderBar';
 import Modal from './components/Modal';
 import ModalImage from './components/ModalImage';
 import Button from './components/Button';
+
+axios.defaults.baseURL = 'https://pixabay.com/api/';
 const constants = {
   PER_PAGE: 12,
   API_KEY: '30167952-193c03fd6f2705e99f5e35c58',
@@ -69,6 +70,24 @@ export default function App() {
       controller.abort();
     };
   }, []);
+
+  const fetchImageGallery = async (
+    searchValue: string = '',
+    page: number = 1
+  ) => {
+    const response = await axios.get('', {
+      params: {
+        key: constants.API_KEY,
+        q: searchValue,
+        image_type: 'photo',
+        orientation: 'horizontal',
+        per_page: constants.PER_PAGE,
+        page: page,
+      },
+    });
+
+    return response.data;
+  };
 
   function galleryMountFilteredById(newImageList: any[]) {
     //Поиск повторяющихся картинок и их фильтр
