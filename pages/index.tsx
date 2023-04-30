@@ -4,7 +4,6 @@ import styles from '@/styles/Home.module.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import fetchImageGallery from './components/axios';
-import constants from './components/constants';
 import ImageGallery from './components/ImageGallery';
 import SearchBar from './components/SearchBar';
 import Loader from './components/Loader/Loader';
@@ -12,6 +11,10 @@ import LoaderForMoreImage from './components/Loader/LoaderBar';
 import Modal from './components/Modal';
 import ModalImage from './components/ModalImage';
 import Button from './components/Button';
+const constants = {
+  PER_PAGE: 12,
+  API_KEY: '30167952-193c03fd6f2705e99f5e35c58',
+};
 
 export default function App() {
   const [imageGalleryList, setImageGalleryList] = useState<any>([]);
