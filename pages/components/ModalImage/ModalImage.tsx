@@ -3,7 +3,7 @@ import styles from './ModalImage.module.css';
 import Image from 'next/image';
 // import { CgClose } from 'react-icons/cg';
 
-const ModalImage = ({ src, alt }) => (
+const ModalImage = ({ src, alt }: { src: string; alt: string }) => (
   <Image
     className={styles.ModalImage}
     src={src}
