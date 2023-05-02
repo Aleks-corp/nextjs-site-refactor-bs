@@ -5,11 +5,23 @@ type Data = {
   name: string;
 };
 
+interface MessageNextApiRequest extends NextApiRequest {
+  query: {
+    message?: string;
+  };
+}
+
 export default function handler(
-  req: NextApiRequest,
+  req: MessageNextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  res.status(200).json({ name: 'John Doe' });
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'application/json');
+  res.end(
+    JSON.stringify({
+      message: req.query.message ?? 'Base message',
+    })
+  );
 }
 
 // export function Post({ post }) {
